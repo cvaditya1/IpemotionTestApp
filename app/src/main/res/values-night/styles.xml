@@ -19,9 +19,8 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
-    <!-- Custom base application theme. -->
-    <!--<style name="CustomDayNightTheme" parent="Theme.AppCompat.DayNight">
+    <style name="NavigationHeaderTheme" parent="ThemeOverlay.AppCompat.Light">
 
-    </style>-->
+    </style>
 
 </resources>

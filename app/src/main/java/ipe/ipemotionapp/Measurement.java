@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.View;
@@ -24,22 +25,20 @@ public class Measurement extends AppCompatActivity
 
     private Button change;
     private UiModeManager uiModeManager;
+    private ActionBar supportActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_measurement);
+
+        if(savedInstanceState == null) {
+            Log.d("CLICK", "@@@@ MODE_NIGHT_AUTO");
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -49,6 +48,18 @@ public class Measurement extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if(toolbar != null)
+            toolbar.setNavigationIcon(R.mipmap.ic_launcher);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         uiModeManager = (UiModeManager)getSystemService(Context.UI_MODE_SERVICE);
         if(uiModeManager != null) {
@@ -95,6 +106,12 @@ public class Measurement extends AppCompatActivity
 
             }
         });
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Log.d("CLICK", "@@@@ onConfigurationChanged");
     }
 
     @Override
@@ -152,5 +169,29 @@ public class Measurement extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("CLICK", "@@@@ onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("CLICK", "@@@@ onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("CLICK", "@@@@ onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("CLICK", "@@@@ onDestroy");
     }
 }
